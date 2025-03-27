@@ -2,20 +2,20 @@ import { projects } from "@/lib/data"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 
-interface ProjectPageProps {
+type PageProps = {
   params: {
     name: string
   }
 }
 
-export default function ProjectPage({ params }: ProjectPageProps) {
+export default async function ProjectPage({ params }: PageProps) {
   const project = projects.find((p) => p.name === params.name)
 
   if (!project) {
     notFound()
   }
 
-  return (
+  return(
     <section className="min-h-screen bg-white text-gray-800">
       <div className="max-w-4xl mx-auto p-6 py-12">
         <Link
