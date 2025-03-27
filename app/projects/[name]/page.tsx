@@ -1,19 +1,19 @@
 // app/projects/[name]/page.tsx
-import { projects } from "@/lib/data";
-import { notFound } from "next/navigation";
-import Link from "next/link";
+import { projects } from "@/lib/data"
+import { notFound } from "next/navigation"
+import Link from "next/link"
 
-type ProjectPageProps = {
+interface ProjectPageProps {
   params: {
-    name: string;
-  };
-};
+    name: string
+  }
+}
 
 export default function ProjectPage({ params }: ProjectPageProps) {
-  const project = projects.find((p) => p.name === params.name);
+  const project = projects.find((p) => p.name === params.name)
 
   if (!project) {
-    notFound();
+    notFound()
   }
 
   return (
@@ -27,7 +27,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         </Link>
 
         <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
-          <div className="w-full bg-gray-100 flex justify-center p-4">
+          <div className="w-full bg-gray-50 flex justify-center p-4">
             <img
               src={project.imageUrl || "/placeholder.svg"}
               alt={project.title}
@@ -65,3 +65,4 @@ export default function ProjectPage({ params }: ProjectPageProps) {
     </section>
   )
 }
+
