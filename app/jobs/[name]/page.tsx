@@ -1,14 +1,16 @@
+// app/jobs/[name]/page.tsx
 import { jobs } from "@/lib/data"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 
-type PageProps = {
-  params: { name: string } | Promise<{ name: string }>
+interface JobPageProps {
+  params: {
+    name: string
+  }
 }
 
-export default async function JobPage({ params }: PageProps) {
-  const resolvedParams = await params
-  const job = jobs.find((j) => j.name === resolvedParams.name)
+export default async function JobPage({ params }: JobPageProps) {
+  const job = jobs.find((j) => j.name === params.name)
 
   if (!job) {
     notFound()
@@ -69,3 +71,4 @@ export default async function JobPage({ params }: PageProps) {
     </section>
   )
 }
+

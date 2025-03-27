@@ -1,17 +1,19 @@
-import { projects } from "@/lib/data"
-import { notFound } from "next/navigation"
-import Link from "next/link"
+// app/projects/[name]/page.tsx
+import { projects } from "@/lib/data";
+import { notFound } from "next/navigation";
+import Link from "next/link";
 
-type PageProps = {
-  params: { name: string } | Promise<{ name: string }>
-}
+type ProjectPageProps = {
+  params: {
+    name: string;
+  };
+};
 
-export default async function ProjectPage({ params }: PageProps) {
-  const resolvedParams = await params
-  const project = projects.find((p) => p.name === resolvedParams.name)
+export default function ProjectPage({ params }: ProjectPageProps) {
+  const project = projects.find((p) => p.name === params.name);
 
   if (!project) {
-    notFound()
+    notFound();
   }
 
   return (
