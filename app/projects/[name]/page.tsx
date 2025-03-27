@@ -3,19 +3,18 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 
 type PageProps = {
-  params: {
-    name: string
-  }
+  params: { name: string } | Promise<{ name: string }>
 }
 
 export default async function ProjectPage({ params }: PageProps) {
-  const project = projects.find((p) => p.name === params.name)
+  const resolvedParams = await params
+  const project = projects.find((p) => p.name === resolvedParams.name)
 
   if (!project) {
     notFound()
   }
 
-  return(
+  return (
     <section className="min-h-screen bg-white text-gray-800">
       <div className="max-w-4xl mx-auto p-6 py-12">
         <Link
@@ -30,7 +29,7 @@ export default async function ProjectPage({ params }: PageProps) {
             <img
               src={project.imageUrl || "/placeholder.svg"}
               alt={project.title}
-              className="max-w-full max-h-[400px] object-contain "
+              className="max-w-full max-h-[400px] object-contain"
             />
           </div>
 
@@ -64,4 +63,3 @@ export default async function ProjectPage({ params }: PageProps) {
     </section>
   )
 }
-
