@@ -1,14 +1,15 @@
+// app/jobs/[name]/page.tsx
 import { jobs } from "@/lib/data"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 
-type Props = {
+type PageProps = {
   params: {
     name: string
   }
 }
 
-export default function JobPage({ params }: Props) {
+export default async function JobPage({ params }: PageProps) {
   const job = jobs.find((j) => j.name === params.name)
 
   if (!job) {
