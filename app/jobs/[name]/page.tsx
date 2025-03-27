@@ -2,13 +2,13 @@ import { jobs } from "@/lib/data"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 
-interface JobPageProps {
+type Props = {
   params: {
     name: string
   }
 }
 
-export default function JobPage({ params }: JobPageProps) {
+export default function JobPage({ params }: Props) {
   const job = jobs.find((j) => j.name === params.name)
 
   if (!job) {
